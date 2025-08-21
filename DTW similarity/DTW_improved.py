@@ -244,7 +244,7 @@ class PoseSimilarityAnalyzer:
         plt.tight_layout(pad=3.0)
         if save_plot:
             plt.savefig('pose_similarity_analysis.png', dpi=300)
-            print("\n🖼️  'pose_similarity_analysis.png' 파일로 시각화 결과가 저장되었습니다.")
+            print("\n 'pose_similarity_analysis.png' 파일로 시각화 결과가 저장되었습니다.")
         plt.show()
 
 def main():
@@ -252,9 +252,9 @@ def main():
     # --- test 폴더의 실제 CSV 사용 ---
     base = os.path.join(os.path.dirname(__file__), 'test')
     trainer_file = os.path.join(base, 'jap_001.csv')
-    member_file = os.path.join(base, 'p04_jap_main_013.csv')
+    member_file = os.path.join(base, 'p04_jap_pre_001.csv')
     if not (os.path.isfile(trainer_file) and os.path.isfile(member_file)):
-        print("❌ test 폴더에서 CSV를 찾을 수 없습니다. 경로를 확인하세요:")
+        print("test 폴더에서 CSV를 찾을 수 없습니다. 경로를 확인하세요:")
         print(f"  trainer_file: {trainer_file}")
         print(f"  member_file : {member_file}")
         return
@@ -273,7 +273,7 @@ def main():
         
         # 피드백 출력
         print("\n" + "="*25)
-        print("📝 개선 피드백")
+        print("개선 피드백")
         print("="*25)
         print(analyzer.get_feedback())
 
@@ -281,7 +281,7 @@ def main():
         analyzer.visualize_analysis(save_plot=True)
 
     except (FileNotFoundError, ValueError, IOError) as e:
-        print(f"\n❌ 오류 발생: {e}")
+        print(f"\n 오류 발생: {e}")
 
 if __name__ == "__main__":
     main()

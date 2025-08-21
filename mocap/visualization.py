@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 from fastdtw import fastdtw
+from typing import Optional, List, Tuple
 
 
 def visualize_results(similarity: float, feature_similarities: dict, feature_weights: dict):
@@ -57,9 +58,12 @@ def animate_3d_segments(analyzer,
                         motion2_data,
                         overlay: bool = True,
                         interval: int = 40,
-                        save_path: str | None = None,
-                        joints_to_show: list[str] | None = None,
-                        skeleton_edges: list[tuple[str, str]] | None = None,
+                        save_path: Optional[str] = None,
+                        joints_to_show: Optional[List[str]] = None, 
+                        skeleton_edges: Optional[List[Tuple[str, str]]] = None,
+                        # save_path: str | None = None,
+                        # joints_to_show: list[str] | None = None,
+                        # skeleton_edges: list[tuple[str, str]] | None = None,
                         sync_mode: str = 'linear'):
     if motion1_data is None or motion2_data is None:
         print("입력 데이터가 없어 3D 애니메이션을 생성할 수 없습니다.")
