@@ -953,7 +953,7 @@ def save_similarity_matrix(
     # 고정 열 이름(이미지 순서 그대로)
     col_order = [
         "Head", "Core", "Right_Leg", "Left_Leg", "Right_Arm", "Left_Arm",
-        "Acceleration", "Velocity", "Position", "Joint Angle", "rotation"
+        "Acceleration", "Velocity", "Position", "Joint Angle", "rotation", "Overall"
     ]
 
     # 내부 키 매핑( compare_motions details → 표의 열 )
@@ -1016,7 +1016,10 @@ def save_similarity_matrix(
         # 한 행 구성(없으면 0.0)
         row = []
         for col in col_order:
-            v = float(details.get(key_map[col], 0.0))
+            if col == "Overall":
+                v = float(similarity)
+            else:   
+                v = float(details.get(key_map[col], 0.0))
             row.append(v)
 
         rows.append(row)
@@ -1052,7 +1055,7 @@ if __name__ == "__main__":
 
     # 파일 경로 예시(수정하여 사용)
     file1 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\test_mocap\\uppercut_left_001.csv"
-    file2 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\p08_Global"
+    file2 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\p09_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1093,7 +1096,7 @@ if __name__ == "__main__":
     keyword="uppercut_left",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
     title="uppercut_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p08_uppercut_left_similarity_matrix.csv"
+    output_csv_path="p09_uppercut_left_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
