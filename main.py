@@ -1096,7 +1096,7 @@ if __name__ == "__main__":
     keyword="uppercut_left",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
     title="uppercut_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p09_uppercut_left_similarity_matrix.csv"
+    output_csv_path="p13_uppercut_left_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
