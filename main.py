@@ -1052,10 +1052,17 @@ if __name__ == "__main__":
     print("복싱 동작 DTW 분석기 (v2.14 - 안정성/정확도 강화)")
     print("=" * 64)
 
+    # uppercurt_left_001.csv
+    # uppercut_right_002.csv
+    # hook_left_002.csv
+    # hook_right_001.csv
+    # jap_001.csv
+    # straight_003.csv
+
 
     # 파일 경로 예시(수정하여 사용)
-    file1 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\test_mocap\\uppercut_left_001.csv"
-    file2 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\p09_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/test_mocap/uppercut_left_001.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p13_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1066,10 +1073,10 @@ if __name__ == "__main__":
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
         'position': 0.0,
-        'rotation': 0.0, ## 0.7
+        'rotation': 0.7, ## 0.7
         'velocity': 0.0,
         'acceleration': 0.0,
-        'joint_angles': 0.0, ## 0.3
+        'joint_angles': 0.3, ## 0.3
     }
 
 
@@ -1093,10 +1100,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="jap",      # 필요 시 수정
+    keyword="uppercut_left",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
     title="uppercut_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p09_uppercut_left_similarity_matrix.csv"
+    output_csv_path="p13_uppercut_left_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
