@@ -939,7 +939,7 @@ def save_similarity_matrix(
     analyzer: MocapMotionAnalyzer,
     keyword: str | None = None,
     limit: int | None = None,
-    title: str = "Uppercut(R)",
+    title: str = "Uppercut(L)",
     output_csv_path: str = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\similarity_matrix.csv"
 ) -> pd.DataFrame:
     """
@@ -1054,8 +1054,8 @@ if __name__ == "__main__":
 
 
     # 파일 경로 예시(수정하여 사용)
-    file1 = "C/Users/jonabi/Downloads/TEPA//uppercut_left_001.csv"
-    file2 = "C/Users/jonabi/Downloads/TEPA"
+    file1 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\test_mocap\\uppercut_left_001.csv"
+    file2 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\p09_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1066,10 +1066,10 @@ if __name__ == "__main__":
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
         'position': 0.0,
-        'rotation': 0.7,
+        'rotation': 0.0, ## 0.7
         'velocity': 0.0,
         'acceleration': 0.0,
-        'joint_angles': 0.3,
+        'joint_angles': 0.0, ## 0.3
     }
 
 
@@ -1093,10 +1093,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="uppercut_left",      # 필요 시 수정
+    keyword="jap",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
     title="uppercut_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p13_uppercut_left_similarity_matrix.csv"
+    output_csv_path="p09_uppercut_left_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
