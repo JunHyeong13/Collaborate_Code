@@ -1054,8 +1054,8 @@ if __name__ == "__main__":
 
 
     # 파일 경로 예시(수정하여 사용)
-    file1 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\test_mocap\\uppercut_left_001.csv"
-    file2 = "C:\\Users\\harry\\OneDrive\\Desktop\\DTW_Method\\Collaborate_Code\\p09_Global"
+    file1 = "C/Users/jonabi/Downloads/TEPA//uppercut_left_001.csv"
+    file2 = "C/Users/jonabi/Downloads/TEPA"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
