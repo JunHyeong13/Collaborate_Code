@@ -1061,8 +1061,8 @@ if __name__ == "__main__":
 
 
     # 파일 경로 예시(수정하여 사용)
-    file1 = "/Users/jonabi/Downloads/TEPA/test_mocap/uppercut_left_001.csv"
-    file2 = "/Users/jonabi/Downloads/TEPA/p13_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/test_mocap/jap_001.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p15_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1100,10 +1100,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="uppercut_left",      # 필요 시 수정
+    keyword="jap",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="uppercut_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p13_uppercut_left_similarity_matrix.csv"
+    title="jap",          # 시트 좌측 첫 열 제목
+    output_csv_path="p15_jap_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
