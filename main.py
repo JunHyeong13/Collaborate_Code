@@ -1109,7 +1109,6 @@ if __name__ == "__main__":
     # 'standard' | 'minmax' | None
     # motion1 = analyzer.load_mocap_data(file1)
     # motion2 = analyzer.load_mocap_data(file2)
-
     # if motion1 is not None and motion2 is not None:
     #     similarity, details = analyzer.compare_motions(motion1, motion2)
     #     analyzer.visualize_results(similarity, details)
