@@ -1060,9 +1060,13 @@ if __name__ == "__main__":
     # straight_003.csv
 
 
-    # 파일 경로 예시(수정하여 사용)
-    file1 = "/Users/jonabi/Downloads/TEPA/Collaborate_Code/test_mocap/hook_right_001.csv"
-    file2 = "/Users/jonabi/Downloads/TEPA/p15_Global"
+    # 파일 경로 예시(수정하여 사용) # 맥북 기준
+    # file1 = "/Users/jonabi/Downloads/TEPA/Collaborate_Code/test_mocap/hook_right_001.csv"
+    # file2 = "/Users/jonabi/Downloads/TEPA/p15_Global"
+    
+    # 윈도우 기준 
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\test_mocap/hook_right_001.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p15_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
