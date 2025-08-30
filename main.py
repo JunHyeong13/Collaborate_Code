@@ -1061,7 +1061,7 @@ if __name__ == "__main__":
 
 
     # 파일 경로 예시(수정하여 사용)
-    file1 = "/Users/jonabi/Downloads/TEPA/test_mocap/jap_001.csv"
+    file1 = "/Users/jonabi/Downloads/TEPA/Collaborate_Code/test_mocap/hook_right_001.csv"
     file2 = "/Users/jonabi/Downloads/TEPA/p15_Global"
  
 
@@ -1100,10 +1100,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="jap",      # 필요 시 수정
+    keyword="hook_right",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="jap",          # 시트 좌측 첫 열 제목
-    output_csv_path="p15_jap_similarity_matrix.csv"
+    title="hook_right",          # 시트 좌측 첫 열 제목
+    output_csv_path="p15_hook_right_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
