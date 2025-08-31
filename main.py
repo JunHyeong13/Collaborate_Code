@@ -1065,8 +1065,8 @@ if __name__ == "__main__":
     # file2 = "/Users/jonabi/Downloads/TEPA/p15_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\Collaborate_Code\\test_mocap\\uppercut_left_001.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p15_Global"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\Collaborate_Code\\test_mocap\\uppercut_right_002.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p18_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1104,10 +1104,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="uppercut_left",      # 필요 시 수정
+    keyword="uppercut_right",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="uppercut_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p15_uppercut_left_similarity_matrix.csv"
+    title="uppercut_right",          # 시트 좌측 첫 열 제목
+    output_csv_path="p18_uppercut_right_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
