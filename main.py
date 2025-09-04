@@ -1065,7 +1065,7 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p19_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_right_003.csv"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_005.csv"
     file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p22_Global"
  
 
@@ -1104,10 +1104,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="hook_right",      # 필요 시 수정
+    keyword="jap",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="hook_right",          # 시트 좌측 첫 열 제목
-    output_csv_path="p22_hook_right_003_similarity_matrix.csv"
+    title="jap",          # 시트 좌측 첫 열 제목
+    output_csv_path="p22_jap_005_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
