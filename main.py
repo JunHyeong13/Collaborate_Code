@@ -1061,12 +1061,12 @@ if __name__ == "__main__":
 
 
     # 파일 경로 예시(수정하여 사용) # 맥북 기준
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/jap_001.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p19_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/jap_005.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p07_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_004.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p22_Global"
+    #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_002.csv"
+    #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p04_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1077,10 +1077,10 @@ if __name__ == "__main__":
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
         'position': 0.0,
-        'rotation': 1.0,
+        'rotation': 0.7,
         'velocity': 0.0,
         'acceleration': 0.0,
-        'joint_angles': 0.0,
+        'joint_angles': 0.3,
     }
 
 
@@ -1104,10 +1104,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="hook_left",      # 필요 시 수정
+    keyword="jap",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="hook_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p22_hook_left_004_similarity_matrix.csv"
+    title="jap",          # 시트 좌측 첫 열 제목
+    output_csv_path="p06_jap_005_similarity_matrix.csv"
     )
     
     # 'standard' | 'minmax' | None
