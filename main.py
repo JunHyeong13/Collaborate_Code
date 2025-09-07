@@ -1061,8 +1061,13 @@ if __name__ == "__main__":
 
 
     # 파일 경로 예시(수정하여 사용) # 맥북 기준
+<<<<<<< Updated upstream
     #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/jap_002.csv"
     #file2 = "/Users/jonabi/Downloads/TEPA/p04_Global"
+=======
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/jap_004.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p13_Global"
+>>>>>>> Stashed changes
     
     # 윈도우 기준 
     file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_004.csv"
