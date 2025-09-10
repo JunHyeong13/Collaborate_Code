@@ -1061,8 +1061,8 @@ if __name__ == "__main__":
     
     #ile1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_004.csv"
     #file2 = "/Users/jonabi/Downloads/TEPA/p04_Global"
-    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
-    file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
+    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
+    #file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
         
     # 윈도우 기준 
     #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_004.csv"
