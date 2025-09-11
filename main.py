@@ -1068,8 +1068,8 @@ if __name__ == "__main__":
     #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_004.csv"
     #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p04_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_003.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p06_Global"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_right_003.csv"
+    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p22_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
@@ -1105,10 +1105,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="hook_left",      # 필요 시 수정
+    keyword="hook_right",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="hook_left",          # 시트 좌측 첫 열 제목
-    output_csv_path="p06_hook_left_003_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+    title="hook_right",          # 시트 좌측 첫 열 제목
+    output_csv_path="p22_hook_right_003_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
