@@ -1103,10 +1103,10 @@ if __name__ == "__main__":
     file1_path=file1,
     file2_dir=file2,
     analyzer=analyzer,
-    keyword="straight",      # 필요 시 수정
+    keyword="hook_left",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
-    title="straight",          # 시트 좌측 첫 열 제목
-    output_csv_path="p08_straight_005_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+    title="hook_right",          # 시트 좌측 첫 열 제목
+    output_csv_path="p19_hook_right_004_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
