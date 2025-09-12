@@ -1059,15 +1059,15 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/straight_005.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p21_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/straight_005.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p26_Global"
         
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_005.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p23_Global"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_005.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p26_Global"
  
-    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\uppercut_left_003.csv"
-    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p18_Global"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_right_001.csv"
+    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p18_Global"
  
 
     # 실행 중 어떤 파일을 비교하는지 표시
