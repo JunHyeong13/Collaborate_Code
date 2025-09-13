@@ -1106,7 +1106,7 @@ if __name__ == "__main__":
         keyword="hook_right",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="hook_right",          # 시트 좌측 첫 열 제목
-        output_csv_path="p23_hook_right_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        output_csv_path="p23_hook_left_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
