@@ -1060,15 +1060,15 @@ if __name__ == "__main__":
     # straight_003.csv
 
     file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_003.csv"
-    file2 = "/Users/jonabi/Downloads/TEPA/p14_Global"
+    file2 = "/Users/jonabi/Downloads/TEPA/p15_Global"
     
     # 윈도우 기준 
 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_005.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p04_Global"
+    #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_005.csv"
+    #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p04_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_001.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p25_Global"
+    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_001.csv"
+    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p25_Global"
  
     # 실행 중 어떤 파일을 비교하는지 표시
     # print(f"분석 대상 파일 1: {file1}")
@@ -1105,7 +1105,7 @@ if __name__ == "__main__":
         keyword="uppercut_right",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="uppercut_right",          # 시트 좌측 첫 열 제목
-        output_csv_path="p14_uppercut_right_003_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        output_csv_path="p15_uppercut_right_003_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
