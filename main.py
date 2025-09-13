@@ -1059,6 +1059,7 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
+
     #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/hook_right_001.csv"
     #file2 = "/Users/jonabi/Downloads/TEPA/p25_Global"
     
