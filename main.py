@@ -1063,8 +1063,13 @@ if __name__ == "__main__":
     file2 = "/Users/jonabi/Downloads/TEPA/p25_Global"
     
     # 윈도우 기준 
+<<<<<<< HEAD
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\straight_002.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p24_Global"
+=======
     #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\straight_001.csv"
     #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p11_Global"
+>>>>>>> 945e4ef9676959e60996df2fb538f50dadce39bd
  
     #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_003.csv"
     #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
