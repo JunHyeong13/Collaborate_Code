@@ -1064,7 +1064,7 @@ if __name__ == "__main__":
     
     # 윈도우 기준 
     file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_001.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p15_Global"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p18_Global"
  
     #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
     #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
@@ -1104,7 +1104,7 @@ if __name__ == "__main__":
         keyword="uppercut_left",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="uppercut_left",          # 시트 좌측 첫 열 제목
-        output_csv_path="p17_uppercut_left_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        output_csv_path="p18_uppercut_left_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
