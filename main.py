@@ -1063,12 +1063,11 @@ if __name__ == "__main__":
     file2 = "/Users/jonabi/Downloads/TEPA/p21_Global"
     
     # 윈도우 기준 
-
-    #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_001.csv"
-    #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p09_Global"
+    # file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_right_003.csv"
+    # file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p06_Global"
  
-    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_001.csv"
-    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p25_Global"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
+    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
  
     # 실행 중 어떤 파일을 비교하는지 표시
     # print(f"분석 대상 파일 1: {file1}")
