@@ -1063,8 +1063,8 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p26_Global"
         
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\straight_001.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p11_Global"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\straight_002.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p24_Global"
  
     #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_right_001.csv"
     #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p18_Global"
@@ -1106,7 +1106,7 @@ if __name__ == "__main__":
     keyword="straight",      # 필요 시 수정
     limit=None,                   # 필요 시 숫자
     title="straight",          # 시트 좌측 첫 열 제목
-    output_csv_path="p11_straight_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+    output_csv_path="p24_straight_002_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
