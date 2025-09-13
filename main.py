@@ -1060,7 +1060,7 @@ if __name__ == "__main__":
     # straight_003.csv
 
     file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
-    file2 = "/Users/jonabi/Downloads/TEPA/p24_Global"
+    file2 = "/Users/jonabi/Downloads/TEPA/p25_Global"
     
     # 윈도우 기준 
 
