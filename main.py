@@ -1052,21 +1052,21 @@ if __name__ == "__main__":
     print("복싱 동작 DTW 분석기 (v2.14 - 안정성/정확도 강화)")
     print("=" * 64)
 
-    # uppercurt_left_001.csv
+    # uppercut_left_001.csv
     # uppercut_right_002.csv
     # hook_left_002.csv
     # hook_right_001.csv
     # jap_001.csv
     # straight_003.csv
 
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p10_Global"
+    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_005.csv"
+    #file2 = "/Users/jonabi/Downloads/TEPA/p26_Global"
     
     # 윈도우 기준 
-    # file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_right_003.csv"
-    # file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p06_Global"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_005.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p24_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_right_005.csv"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
     file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
  
     # 실행 중 어떤 파일을 비교하는지 표시
