@@ -1063,8 +1063,8 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p24_Global"
     
     # 윈도우 기준 
-    #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_001.csv"
-    #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p24_Global"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_left_001.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p24_Global"
  
     #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
     #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
