@@ -1059,11 +1059,11 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    #ile1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p24_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_005.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p26_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_005.csv"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_004.csv"
     file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p24_Global"
  
     #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
@@ -1101,10 +1101,10 @@ if __name__ == "__main__":
         file1_path=file1,
         file2_dir=file2,
         analyzer=analyzer,
-        keyword="hook_left",      # 필요 시 수정
+        keyword="hook_right",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="hook_left",          # 시트 좌측 첫 열 제목
-        output_csv_path="p24_hook_left_005_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        output_csv_path="p24_hook_left_004_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
