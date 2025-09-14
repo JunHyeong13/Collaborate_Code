@@ -1059,7 +1059,7 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_004.csv"
     file2 = "/Users/jonabi/Downloads/TEPA/p24_Global"
     
     # 윈도우 기준 
@@ -1104,7 +1104,7 @@ if __name__ == "__main__":
         keyword="uppercut_left",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="uppercut_left",          # 시트 좌측 첫 열 제목
-        output_csv_path="p24_uppercut_left_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        output_csv_path="p24_uppercut_left_004_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
