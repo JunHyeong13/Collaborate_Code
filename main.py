@@ -1059,15 +1059,15 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_002.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_003.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
+    #file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_003.csv"
+    #file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
+    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
+    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
  
     # 실행 중 어떤 파일을 비교하는지 표시
     # print(f"분석 대상 파일 1: {file1}")
@@ -1100,12 +1100,11 @@ if __name__ == "__main__":
     _ = save_similarity_matrix(
         file1_path=file1,
         file2_dir=file2,
-        analyzer=analyzer,
-        keyword="hook_left",      # 필요 시 수정
-        keyword="hook_left",      # 필요 시 수정
-        limit=None,                   # 필요 시 숫자
-        title="hook_left",          # 시트 좌측 첫 열 제목
-        output_csv_path="p02_hook_left_003_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        analyzer=analyzer, 
+        keyword="uppercut_right",      # 필요 시 수정
+        limit=None,  
+        title="uppercut_right",          # 시트 좌측 첫 열 제목
+        output_csv_path="p08_uppercut_right_002_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
