@@ -8,8 +8,9 @@ from scipy.spatial.distance import euclidean
 from fastdtw import fastdtw
 from scipy.spatial.transform import Rotation as R
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-import warnings
+import warnings``
 import matplotlib.pyplot as plt
+import re
 from matplotlib.animation import FuncAnimation, PillowWriter
 from mocap.visualization import visualize_results as viz_results
 from mocap.visualization import animate_3d_segments as viz_animate
@@ -857,75 +858,75 @@ class MocapMotionAnalyzer:
 
 # 유사도를 한번에 여러 파일과 비교하는 배치 함수
 
-def print_similarity_batch(file1_path: str, file2_dir: str, analyzer: MocapMotionAnalyzer,
-                           keyword: str | None = None, limit: int | None = None):
-    """
-    file2_dir 안의 모든 CSV(선택적으로 keyword 필터)를 file1과 비교하고,
-    전체 유사도와 주요 항목을 콘솔에 깔끔하게 출력합니다.
-    """
-    file1 = Path(file1_path)
-    dir2 = Path(file2_dir)
+# def print_similarity_batch(file1_path: str, file2_dir: str, analyzer: MocapMotionAnalyzer,
+#                            keyword: str | None = None, limit: int | None = None):
+#     """
+#     file2_dir 안의 모든 CSV(선택적으로 keyword 필터)를 file1과 비교하고,
+#     전체 유사도와 주요 항목을 콘솔에 깔끔하게 출력합니다.
+#     """
+#     file1 = Path(file1_path)
+#     dir2 = Path(file2_dir)
 
-    if not file1.exists():
-        print(f"[오류] file1이 존재하지 않습니다: {file1}")
-        return
-    if not dir2.exists() or not dir2.is_dir():
-        print(f"[오류] file2 디렉터리가 존재하지 않습니다: {dir2}")
-        return
+#     if not file1.exists():
+#         print(f"[오류] file1이 존재하지 않습니다: {file1}")
+#         return
+#     if not dir2.exists() or not dir2.is_dir():
+#         print(f"[오류] file2 디렉터리가 존재하지 않습니다: {dir2}")
+#         return
 
-    # file1은 한 번만 로드
-    motion1 = analyzer.load_mocap_data(str(file1))
-    if motion1 is None:
-        print("[오류] file1 로드 실패로 배치 비교를 종료합니다.")
-        return
+#     # file1은 한 번만 로드
+#     motion1 = analyzer.load_mocap_data(str(file1))
+#     if motion1 is None:
+#         print("[오류] file1 로드 실패로 배치 비교를 종료합니다.")
+#         return
 
-    # 대상 파일 수집
-    candidates = sorted([p for p in dir2.glob("*.csv") if p.is_file()])
-    if keyword:
-        candidates = [p for p in candidates if keyword.lower() in p.name.lower()]
-    # file1이 같은 디렉토리에 있어도 제외
-    candidates = [p for p in candidates if p.resolve() != file1.resolve()]
-    if limit is not None:
-        candidates = candidates[:limit]
+#     # 대상 파일 수집
+#     candidates = sorted([p for p in dir2.glob("*.csv") if p.is_file()])
+#     if keyword:
+#         candidates = [p for p in candidates if keyword.lower() in p.name.lower()]
+#     # file1이 같은 디렉토리에 있어도 제외
+#     candidates = [p for p in candidates if p.resolve() != file1.resolve()]
+#     if limit is not None:
+#         candidates = candidates[:limit]
 
-    if not candidates:
-        msg = f"'{dir2}'에서 비교할 CSV가 없습니다."
-        if keyword:
-            msg += f" (키워드='{keyword}')"
-        print(msg)
-        return
+#     if not candidates:
+#         msg = f"'{dir2}'에서 비교할 CSV가 없습니다."
+#         if keyword:
+#             msg += f" (키워드='{keyword}')"
+#         print(msg)
+#         return
 
-    print("\n" + "=" * 72)
-    print(f"[배치 비교 시작] 기준 파일: {file1.name}  |  대상 디렉터리: {dir2}")
-    if keyword:
-        print(f"키워드 필터: {keyword}")
-    print(f"총 대상 파일 수: {len(candidates)}")
-    print("=" * 72)
+#     print("\n" + "=" * 72)
+#     print(f"[배치 비교 시작] 기준 파일: {file1.name}  |  대상 디렉터리: {dir2}")
+#     if keyword:
+#         print(f"키워드 필터: {keyword}")
+#     print(f"총 대상 파일 수: {len(candidates)}")
+#     print("=" * 72)
 
-    for idx, p in enumerate(candidates, start=1):
-        print(f"\n[{idx}/{len(candidates)}] 비교 대상: {p.name}")
-        motion2 = analyzer.load_mocap_data(str(p))
-        if motion2 is None:
-            print(" → 로드 실패, 건너뜁니다.")
-            continue
+#     for idx, p in enumerate(candidates, start=1):
+#         print(f"\n[{idx}/{len(candidates)}] 비교 대상: {p.name}")
+#         motion2 = analyzer.load_mocap_data(str(p))
+#         if motion2 is None:
+#             print(" → 로드 실패, 건너뜁니다.")
+#             continue
 
-        # 비교
-        similarity, details = analyzer.compare_motions(motion1, motion2)
+#         # 비교
+#         similarity, details = analyzer.compare_motions(motion1, motion2)
 
-        # 출력(간단/명료)
-        print(f" → 전체 유사도: {similarity:.4f}")
-        # 주요 피처별 유사도만 골라 간단 표기
-        for key in ('rotation', 'joint_angles', 'position', 'velocity', 'acceleration'):
-            if key in details:
-                print(f"    - {key:13s}: {details[key]:.4f}")
-        # 파트 요약(원하면 주석 해제)
-        for part in ('part_left_arm','part_right_arm','part_left_leg','part_right_leg','part_core','part_head'):
-            if part in details:
-                print(f"    - {part:13s}: {details[part]:.4f}")
+#         # 출력(간단/명료)
+#         print(f" → 전체 유사도: {similarity:.4f}")
+#         # 주요 피처별 유사도만 골라 간단 표기
+#         for key in ('rotation', 'joint_angles', 'position', 'velocity', 'acceleration'):
+#             if key in details:
+#                 print(f"    - {key:13s}: {details[key]:.4f}")
+#         # 파트 요약(원하면 주석 해제)
+#         for part in ('part_left_arm','part_right_arm','part_left_leg','part_right_leg','part_core','part_head'):
+#             if part in details:
+#                 print(f"    - {part:13s}: {details[part]:.4f}")
 
-    print("\n" + "=" * 72)
-    print("[배치 비교 완료]")
-    print("=" * 72)
+#     print("\n" + "=" * 72)
+#     print("[배치 비교 완료]")
+#     print("=" * 72)
     
     # utils/save_similarity_matrix.py  (새 파일로 두거나, 기존 파일 하단에 추가해도 됩니다)
 
@@ -1046,6 +1047,82 @@ def save_similarity_matrix(
     return df
 
 
+# ============================= 기존 similarity 계산하는 함수 아래에 작성===================
+def _resolve_base_dir(file2_path: str) -> Path:
+    """
+    file2_path가 '.../p02_Global'처럼 특정 그룹 폴더를 가리켜도
+    그 부모를 베이스로 사용하도록 해석합니다.
+    """
+    p = Path(file2_path)
+    name = p.name.lower()
+    if p.is_dir() and re.match(r"^p\d{2}_global$", name):
+        return p.parent
+    return p
+
+def save_similarity_across_groups(
+    file1_path: str,
+    file2_path_or_base: str,
+    analyzer: MocapMotionAnalyzer,
+    start: int = 2,
+    end: int = 26,
+    keyword: str | None = None,
+    limit: int | None = None,
+    title: str = "straight",
+    output_dir: str | None = None,
+) -> dict[int, pd.DataFrame]:
+    """
+    베이스 디렉터리 아래의 p{02..26}_Global 폴더들을 오름차순으로 순회하여
+    각 폴더 안 CSV와 file1을 비교한 '유사도 매트릭스'를 폴더별 CSV로 저장합니다.
+
+    반환값: { 그룹번호(int): DataFrame }  (생성된 순서대로)
+    """
+    base_dir = _resolve_base_dir(file2_path_or_base)
+    if not base_dir.exists() or not base_dir.is_dir():
+        print(f"[오류] 베이스 디렉터리가 존재하지 않습니다: {base_dir}")
+        return {}
+
+    out_dir = Path(output_dir) if output_dir else base_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    results: dict[int, pd.DataFrame] = {}
+    print("\n" + "=" * 72)
+    print(f"[그룹 배치 비교 시작] 베이스: {base_dir}")
+    print(f"대상 그룹: p{start:02d}_Global ~ p{end:02d}_Global")
+    print("=" * 72)
+
+    for i in range(start, end + 1):
+        group_name = f"p{i:02d}_Global"
+        group_dir = base_dir / group_name
+        if not group_dir.exists() or not group_dir.is_dir():
+            print(f"[안내] {group_name} 경로가 없습니다. 건너뜁니다.")
+            continue
+
+        print("\n" + "-" * 64)
+        print(f"[진행] 그룹 폴더: {group_name}")
+        out_csv = out_dir / f"{title}_{group_name}_003_similarity_matrix.csv"
+
+        df = save_similarity_matrix(
+            file1_path=file1_path,
+            file2_dir=str(group_dir),
+            analyzer=analyzer,
+            keyword=keyword,
+            limit=limit,
+            title=f"{title}|{group_name}",
+            output_csv_path=str(out_csv),
+        )
+        if not df.empty:
+            results[i] = df
+            print(f"[완료] {group_name} 결과를 저장했습니다: {out_csv}")
+        else:
+            print(f"[안내] {group_name}에서 유효한 결과가 없어 CSV를 생성하지 않았습니다.")
+
+    print("\n" + "=" * 72)
+    print("[그룹 배치 비교 완료]")
+    print("=" * 72)
+    return results
+
+# ============================= 기존 similarity 계산하는 함수 아래에 작성===================
+
 # =============================== Main ==============================
 
 if __name__ == "__main__":
@@ -1059,6 +1136,7 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
+<<<<<<< HEAD
     # file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_002.csv"
     # file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
     
@@ -1068,18 +1146,26 @@ if __name__ == "__main__":
  
     file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_001.csv"
     file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p04_Global"
+=======
+    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
+    #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
+    
+    # 윈도우 기준 
+    file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
+    file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
  
-    # 실행 중 어떤 파일을 비교하는지 표시
-    # print(f"분석 대상 파일 1: {file1}")
-    # print(f"분석 대상 파일 2: {file2}")
+    # file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
+    # file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
+>>>>>>> 462eea5298e7c83a9cc7e3786246fa24ba7f7bc4
+ 
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
         'position': 0.0,
-        'rotation': 0.7,
-        'velocity': 0.0,
-        'acceleration': 0.0,
-        'joint_angles': 0.3,
+        'rotation': 0.0,
+        'velocity': 1.0,
+        'acceleration': 1.0,
+        'joint_angles': 1.0,
     }
 
     analyzer = MocapMotionAnalyzer(scaling='standard', feature_weights=custom_feature_weights)  
@@ -1097,15 +1183,40 @@ if __name__ == "__main__":
     #     limit=None      # 예: 10 또는 None
     # )
     
-    _ = save_similarity_matrix(
+    
+    # p02_Global ~ p26_Global을 오름차순 탐색
+    _ = save_similarity_across_groups(
         file1_path=file1,
-        file2_dir=file2,
+        file2_path_or_base=file2,  # 혹은 베이스 경로 자체
         analyzer=analyzer,
+<<<<<<< HEAD
         keyword="jap",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="jap",          # 시트 좌측 첫 열 제목
         output_csv_path="p04_jap_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+=======
+        start=2,
+        end=26,
+        keyword="straight",   # 필요 시 None
+        limit=None,            # 필요 시 정수
+        title="straight",
+        output_dir=None,       # None이면 베이스 디렉터리에 저장
+>>>>>>> 462eea5298e7c83a9cc7e3786246fa24ba7f7bc4
     )
+    
+    ## ======================= Similarity 계산 방식 (폴더를 따로 본인이 지정해줘야함) =========================
+    
+    # _ = save_similarity_matrix(
+    #     file1_path=file1,
+    #     file2_dir=file2,
+    #     analyzer=analyzer, # 필요 시 수정
+    #     keyword="hook_right",      # 필요 시 수정
+    #     limit=None,                   # 필요 시 숫자
+    #     title="hook_right",          # 시트 좌측 첫 열 제목
+    #     output_csv_path="p26_hook_right_005_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+    # )
+    
+    ## ======================= 모션 1:1 비교 분석 =========================
     
     # 'standard' | 'minmax' | None
     # motion1 = analyzer.load_mocap_data(file1)
