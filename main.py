@@ -10,6 +10,7 @@ from scipy.spatial.transform import Rotation as R
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 import warnings
 import matplotlib.pyplot as plt
+import re
 from matplotlib.animation import FuncAnimation, PillowWriter
 from mocap.visualization import visualize_results as viz_results
 from mocap.visualization import animate_3d_segments as viz_animate
@@ -1046,6 +1047,82 @@ def save_similarity_matrix(
     return df
 
 
+# ============================= 기존 similarity 계산하는 함수 아래에 작성===================
+def _resolve_base_dir(file2_path: str) -> Path:
+    """
+    file2_path가 '.../p02_Global'처럼 특정 그룹 폴더를 가리켜도
+    그 부모를 베이스로 사용하도록 해석합니다.
+    """
+    p = Path(file2_path)
+    name = p.name.lower()
+    if p.is_dir() and re.match(r"^p\d{2}_global$", name):
+        return p.parent
+    return p
+
+def save_similarity_across_groups(
+    file1_path: str,
+    file2_path_or_base: str,
+    analyzer: MocapMotionAnalyzer,
+    start: int = 2,
+    end: int = 26,
+    keyword: str | None = None,
+    limit: int | None = None,
+    title: str = "jap",
+    output_dir: str | None = None,
+) -> dict[int, pd.DataFrame]:
+    """
+    베이스 디렉터리 아래의 p{02..26}_Global 폴더들을 오름차순으로 순회하여
+    각 폴더 안 CSV와 file1을 비교한 '유사도 매트릭스'를 폴더별 CSV로 저장합니다.
+
+    반환값: { 그룹번호(int): DataFrame }  (생성된 순서대로)
+    """
+    base_dir = _resolve_base_dir(file2_path_or_base)
+    if not base_dir.exists() or not base_dir.is_dir():
+        print(f"[오류] 베이스 디렉터리가 존재하지 않습니다: {base_dir}")
+        return {}
+
+    out_dir = Path(output_dir) if output_dir else base_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    results: dict[int, pd.DataFrame] = {}
+    print("\n" + "=" * 72)
+    print(f"[그룹 배치 비교 시작] 베이스: {base_dir}")
+    print(f"대상 그룹: p{start:02d}_Global ~ p{end:02d}_Global")
+    print("=" * 72)
+
+    for i in range(start, end + 1):
+        group_name = f"p{i:02d}_Global"
+        group_dir = base_dir / group_name
+        if not group_dir.exists() or not group_dir.is_dir():
+            print(f"[안내] {group_name} 경로가 없습니다. 건너뜁니다.")
+            continue
+
+        print("\n" + "-" * 64)
+        print(f"[진행] 그룹 폴더: {group_name}")
+        out_csv = out_dir / f"{title}_{group_name}_similarity_matrix.csv"
+
+        df = save_similarity_matrix(
+            file1_path=file1_path,
+            file2_dir=str(group_dir),
+            analyzer=analyzer,
+            keyword=keyword,
+            limit=limit,
+            title=f"{title}|{group_name}",
+            output_csv_path=str(out_csv),
+        )
+        if not df.empty:
+            results[i] = df
+            print(f"[완료] {group_name} 결과를 저장했습니다: {out_csv}")
+        else:
+            print(f"[안내] {group_name}에서 유효한 결과가 없어 CSV를 생성하지 않았습니다.")
+
+    print("\n" + "=" * 72)
+    print("[그룹 배치 비교 완료]")
+    print("=" * 72)
+    return results
+
+# ============================= 기존 similarity 계산하는 함수 아래에 작성===================
+
 # =============================== Main ==============================
 
 if __name__ == "__main__":
@@ -1063,23 +1140,20 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p17_Global"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_right_005.csv"
+    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p26_Global"
  
     #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
     #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
  
-    # 실행 중 어떤 파일을 비교하는지 표시
-    # print(f"분석 대상 파일 1: {file1}")
-    # print(f"분석 대상 파일 2: {file2}")
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
         'position': 0.0,
         'rotation': 0.7,
-        'velocity': 0.0,
+        'velocity': 0.3,
         'acceleration': 0.0,
-        'joint_angles': 0.3,
+        'joint_angles': 0.0,
     }
 
     analyzer = MocapMotionAnalyzer(scaling='standard', feature_weights=custom_feature_weights)  
@@ -1101,10 +1175,10 @@ if __name__ == "__main__":
         file1_path=file1,
         file2_dir=file2,
         analyzer=analyzer, # 필요 시 수정
-        keyword="hook_left",      # 필요 시 수정
+        keyword="hook_right",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
-        title="hook_left",          # 시트 좌측 첫 열 제목
-        output_csv_path="p17_hook_left_002_new_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        title="hook_right",          # 시트 좌측 첫 열 제목
+        output_csv_path="p26_hook_right_005_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
