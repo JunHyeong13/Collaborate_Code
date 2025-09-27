@@ -1188,20 +1188,13 @@ if __name__ == "__main__":
     _ = save_similarity_across_groups(
         file1_path=file1,
         file2_path_or_base=file2,  # 혹은 베이스 경로 자체
-        analyzer=analyzer,
-<<<<<<< HEAD
-        keyword="jap",      # 필요 시 수정
-        limit=None,                   # 필요 시 숫자
-        title="jap",          # 시트 좌측 첫 열 제목
-        output_csv_path="p04_jap_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
-=======
+        analyzer=analyzer,      # 시트 좌측 첫 열 제목      # 시트 좌측 첫 열 제목
         start=2,
         end=26,
         keyword="straight",   # 필요 시 None
         limit=None,            # 필요 시 정수
         title="straight",
         output_dir=None,       # None이면 베이스 디렉터리에 저장
->>>>>>> 462eea5298e7c83a9cc7e3786246fa24ba7f7bc4
     )
     
     ## ======================= Similarity 계산 방식 (폴더를 따로 본인이 지정해줘야함) =========================
