@@ -1067,7 +1067,7 @@ def save_similarity_across_groups(
     end: int = 26,
     keyword: str | None = None,
     limit: int | None = None,
-    title: str = "straight",
+    title: str = "uppercut_left",
     output_dir: str | None = None,
 ) -> dict[int, pd.DataFrame]:
     """
@@ -1136,12 +1136,12 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
+    file2 = "/Users/jonabi/Downloads/TEPA/p02_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
-    file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
+    #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
+    #file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
  
     # file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
     # file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
@@ -1179,9 +1179,9 @@ if __name__ == "__main__":
         analyzer=analyzer,
         start=2,
         end=26,
-        keyword="straight",   # 필요 시 None
+        keyword="uppercut_left",   # 필요 시 None
         limit=None,            # 필요 시 정수
-        title="straight",
+        title="uppercut_left",
         output_dir=None,       # None이면 베이스 디렉터리에 저장
     )
     
