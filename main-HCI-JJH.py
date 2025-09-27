@@ -1067,7 +1067,7 @@ def save_similarity_across_groups(
     end: int = 26,
     keyword: str | None = None,
     limit: int | None = None,
-    title: str = "uppercut_right",
+    title: str = "hook_left",
     output_dir: str | None = None,
 ) -> dict[int, pd.DataFrame]:
     """
@@ -1140,10 +1140,10 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
     
     # 윈도우 기준 
-    #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\uppercut_right_002.csv"
+    #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
     #file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\uppercut_right_002.csv"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
     file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p02_Global"
  
  
@@ -1179,9 +1179,9 @@ if __name__ == "__main__":
         analyzer=analyzer,
         start=2,
         end=26,
-        keyword="uppercut_right",   # 필요 시 None
+        keyword="hook_right",   # 필요 시 None
         limit=None,            # 필요 시 정수
-        title="uppercut_right",  # 시트 좌측 첫 열 제목
+        title="hook_left",
         output_dir=None,       # None이면 베이스 디렉터리에 저장
     )
     
