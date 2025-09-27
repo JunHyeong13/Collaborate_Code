@@ -1140,11 +1140,11 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_001.csv"
+    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_003.csv"
     file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
  
-    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
-    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
+    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
  
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
