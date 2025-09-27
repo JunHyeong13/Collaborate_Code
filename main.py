@@ -1067,7 +1067,7 @@ def save_similarity_across_groups(
     end: int = 26,
     keyword: str | None = None,
     limit: int | None = None,
-    title: str = "jap",
+    title: str = "straight",
     output_dir: str | None = None,
 ) -> dict[int, pd.DataFrame]:
     """
@@ -1099,7 +1099,7 @@ def save_similarity_across_groups(
 
         print("\n" + "-" * 64)
         print(f"[진행] 그룹 폴더: {group_name}")
-        out_csv = out_dir / f"{title}_{group_name}_similarity_matrix.csv"
+        out_csv = out_dir / f"{title}_{group_name}_003_similarity_matrix.csv"
 
         df = save_similarity_matrix(
             file1_path=file1_path,
@@ -1140,20 +1140,20 @@ if __name__ == "__main__":
     #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_003.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
+    file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
+    file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
+    # file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
+    # file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
  
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
         'position': 0.0,
-        'rotation': 0.7,
-        'velocity': 0.3,
-        'acceleration': 0.0,
-        'joint_angles': 0.0,
+        'rotation': 0.0,
+        'velocity': 1.0,
+        'acceleration': 1.0,
+        'joint_angles': 1.0,
     }
 
     analyzer = MocapMotionAnalyzer(scaling='standard', feature_weights=custom_feature_weights)  
@@ -1179,9 +1179,9 @@ if __name__ == "__main__":
         analyzer=analyzer,
         start=2,
         end=26,
-        keyword="jap",   # 필요 시 None
+        keyword="straight",   # 필요 시 None
         limit=None,            # 필요 시 정수
-        title="jap",
+        title="straight",
         output_dir=None,       # None이면 베이스 디렉터리에 저장
     )
     
