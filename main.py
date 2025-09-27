@@ -1059,15 +1059,15 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_002.csv"
-    file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
+    # file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_002.csv"
+    # file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
     
     # 윈도우 기준 
-    file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_002.csv"
-    file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
+    # file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_002.csv"
+    # file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_001.csv"
+    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p04_Global"
  
     # 실행 중 어떤 파일을 비교하는지 표시
     # print(f"분석 대상 파일 1: {file1}")
@@ -1104,7 +1104,7 @@ if __name__ == "__main__":
         keyword="jap",      # 필요 시 수정
         limit=None,                   # 필요 시 숫자
         title="jap",          # 시트 좌측 첫 열 제목
-        output_csv_path="p02_jap_002_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
+        output_csv_path="p04_jap_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
     )
     
     # 'standard' | 'minmax' | None
