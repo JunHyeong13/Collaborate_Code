@@ -8,7 +8,7 @@ from scipy.spatial.distance import euclidean
 from fastdtw import fastdtw
 from scipy.spatial.transform import Rotation as R
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-import warnings``
+import warnings
 import matplotlib.pyplot as plt
 import re
 from matplotlib.animation import FuncAnimation, PillowWriter
@@ -1067,7 +1067,7 @@ def save_similarity_across_groups(
     end: int = 26,
     keyword: str | None = None,
     limit: int | None = None,
-    title: str = "uppercut_left",
+    title: str = "hook_left",
     output_dir: str | None = None,
 ) -> dict[int, pd.DataFrame]:
     """
@@ -1136,15 +1136,16 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p02_Global"
+    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
+    #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
     
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_001.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p04_Global"
-
     # 윈도우 기준 
-    #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
+    #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
     #file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
+ 
+    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
+    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p02_Global"
+ 
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
@@ -1170,16 +1171,18 @@ if __name__ == "__main__":
     #     limit=None      # 예: 10 또는 None
     # )
     
+    
     # p02_Global ~ p26_Global을 오름차순 탐색
     _ = save_similarity_across_groups(
         file1_path=file1,
         file2_path_or_base=file2,  # 혹은 베이스 경로 자체
-        analyzer=analyzer,      # 시트 좌측 첫 열 제목      # 시트 좌측 첫 열 제목
+        analyzer=analyzer,
         start=2,
-        end=26, # 시트 좌측 첫 열 제목
-        keyword="uppercut_left",   # 필요 시 None
-        title="uppercut_left",
-        output_dir=None,       # None이면 베이스 디렉터리에 저장2eea5298e7c83a9cc7e3786246fa24ba7f7bc4
+        end=26,
+        keyword="hook_right",   # 필요 시 None
+        limit=None,            # 필요 시 정수
+        title="hook_left",
+        output_dir=None,       # None이면 베이스 디렉터리에 저장
     )
     
     ## ======================= Similarity 계산 방식 (폴더를 따로 본인이 지정해줘야함) =========================
