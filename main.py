@@ -1139,8 +1139,8 @@ if __name__ == "__main__":
     #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
     #file2 = "/Users/jonabi/Downloads/TEPA/p02_Global"
     
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_001.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p04_Global"
+    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_001.csv"
+    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p04_Global"
 
     # 윈도우 기준 
     #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
