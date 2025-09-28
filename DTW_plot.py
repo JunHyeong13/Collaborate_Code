@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # 데이터 파일이 있는 디렉토리 경로
-directory_path = 'C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\DTWS'
+directory_path = 'C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\Motion_weight_1.0'
 output_dir = os.path.join(directory_path, 'DTW_plots')
 
 # 출력 폴더가 없으면 생성
@@ -87,7 +87,7 @@ def process_file(file_path):
 
         # 3️⃣ 컬럼별 y축 범위 적용
         y_min, y_max = y_ranges[column]
-        plt.ylim(y_min, y_max)
+        plt.ylim(0, y_max)
 
         # 저장 경로
         file_name = os.path.basename(file_path).split('.')[0]
