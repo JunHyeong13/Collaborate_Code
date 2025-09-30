@@ -1,0 +1,234 @@
+Report generated at 2025-09-30T19:43:24.367847
+Source directory: /Users/jonabi/Downloads/TEPA/Motion_weight_1.0
+Total CSV files: 151
+Long rows: 5436
+
+Missing condition means detected:
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/rmanova_long.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Acceleration.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Core.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Head.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Joint_Angle.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Arm.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Left_Leg.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Overall.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Position.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Arm.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Right_Leg.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=rotation.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Head | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Core | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Right_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Left_Leg | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Right_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Left_Arm | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Acceleration | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Velocity | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Position | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Joint Angle | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=rotation | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/DTW_for_spss/wide_per_feature/wide_feature=Velocity.csv | feature=Overall | missing=Pre,Main,Post
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Head | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Core | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Right_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Left_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Right_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Left_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Acceleration | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Velocity | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Position | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Joint Angle | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=rotation | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_left_p25_Global_002_similarity_matrix.csv | feature=Overall | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Head | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Core | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Right_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Left_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Right_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Left_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Acceleration | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Velocity | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Position | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Joint Angle | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=rotation | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/hook_right_p25_Global_001_similarity_matrix.csv | feature=Overall | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Head | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Core | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Right_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Left_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Right_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Left_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Acceleration | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Velocity | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Position | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Joint Angle | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=rotation | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/jap_p25_Global_similarity_matrix.csv | feature=Overall | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Head | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Core | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Right_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Left_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Right_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Left_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Acceleration | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Velocity | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Position | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Joint Angle | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=rotation | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/straight_p25_Global_003_similarity_matrix.csv | feature=Overall | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Head | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Core | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Right_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Left_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Right_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Left_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Acceleration | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Velocity | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Position | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Joint Angle | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=rotation | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_left_p25_Global_003_similarity_matrix.csv | feature=Overall | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Head | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Core | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Right_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Left_Leg | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Right_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Left_Arm | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Acceleration | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Velocity | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Position | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Joint Angle | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=rotation | missing=Main
+- /Users/jonabi/Downloads/TEPA/Motion_weight_1.0/uppercut_right_p25_Global_002_similarity_matrix.csv | feature=Overall | missing=Main
