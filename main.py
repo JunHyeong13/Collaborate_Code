@@ -1099,7 +1099,7 @@ def save_similarity_across_groups(
 
         print("\n" + "-" * 64)
         print(f"[진행] 그룹 폴더: {group_name}")
-        out_csv = out_dir / f"{title}_{group_name}_003_similarity_matrix.csv"
+        out_csv = out_dir / f"{title}_{group_name}_002_similarity_matrix.csv"
 
         df = save_similarity_matrix(
             file1_path=file1_path,
@@ -1136,10 +1136,10 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-
     file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
     file2 = "/Users/jonabi/Downloads/TEPA/p02_Global"
     
+
     # 윈도우 기준 
     #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
     #file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
@@ -1172,18 +1172,17 @@ if __name__ == "__main__":
     #     limit=None      # 예: 10 또는 None
     # )
     
-    
     # p02_Global ~ p26_Global을 오름차순 탐색
     _ = save_similarity_across_groups(
         file1_path=file1,
         file2_path_or_base=file2,  # 혹은 베이스 경로 자체
         analyzer=analyzer,
+        keyword="jap",      # 필요 시 수정
+        limit=None,                   # 필요 시 숫자
+        title="jap",          # 시트 좌측 첫 열 제목
         start=2,
-        end=26,
-        keyword="uppercut_left",   # 필요 시 None
-        limit=None,            # 필요 시 정수
-        title="uppercut_left",
-        output_dir=None,       # None이면 베이스 디렉터리에 저장62eea5298e7c83a9cc7e3786246fa24ba7f7bc4
+        end=26, # 시트 좌측 첫 열 제목 # 필요 시 None
+        output_dir=None,       # None이면 베이스 디렉터리에 저장
     )
     
     ## ======================= Similarity 계산 방식 (폴더를 따로 본인이 지정해줘야함) =========================
