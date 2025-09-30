@@ -1136,24 +1136,9 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-<<<<<<< HEAD
+
     file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_001.csv"
     file2 = "/Users/jonabi/Downloads/TEPA/p02_Global"
-=======
-<<<<<<< HEAD
-    # file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_right_002.csv"
-    # file2 = "/Users/jonabi/Downloads/TEPA/p08_Global"
-    
-    # 윈도우 기준 
-    # file1 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\mocap_test\\jap_002.csv"
-    # file2 = "C:\\Users\\PC\\Documents\\GitHub\\Collaborate_Code\\p02_Global"
- 
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_001.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p04_Global"
-=======
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
->>>>>>> cef7a0e8bbfbb64029e69ccae75c6ce365237175
     
     # 윈도우 기준 
     #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\straight_003.csv"
@@ -1161,7 +1146,6 @@ if __name__ == "__main__":
  
     # file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\jap_005.csv"
     # file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p26_Global"
->>>>>>> 462eea5298e7c83a9cc7e3786246fa24ba7f7bc4
  
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
@@ -1194,19 +1178,12 @@ if __name__ == "__main__":
         file1_path=file1,
         file2_path_or_base=file2,  # 혹은 베이스 경로 자체
         analyzer=analyzer,
-<<<<<<< HEAD
-        keyword="jap",      # 필요 시 수정
-        limit=None,                   # 필요 시 숫자
-        title="jap",          # 시트 좌측 첫 열 제목
-        output_csv_path="p04_jap_001_similarity_matrix.csv"      # 시트 좌측 첫 열 제목
-=======
         start=2,
         end=26,
         keyword="uppercut_left",   # 필요 시 None
         limit=None,            # 필요 시 정수
         title="uppercut_left",
-        output_dir=None,       # None이면 베이스 디렉터리에 저장
->>>>>>> 462eea5298e7c83a9cc7e3786246fa24ba7f7bc4
+        output_dir=None,       # None이면 베이스 디렉터리에 저장62eea5298e7c83a9cc7e3786246fa24ba7f7bc4
     )
     
     ## ======================= Similarity 계산 방식 (폴더를 따로 본인이 지정해줘야함) =========================
