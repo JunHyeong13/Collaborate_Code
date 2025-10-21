@@ -23,8 +23,9 @@ class MocapMotionAnalyzer:
     """
     모션 캡처 데이터를 사용하여 두 복싱 동작의 유사도를 정교하게 분석하는 클래스.
 
-    v2.14 (안정화/정확도 강화)
-    - CSV 로드 시 비수치→NaN→0 치환
+    v2.17 (Frame 열 기준 정교한 결측치 처리)
+    - CSV 로드 시 Frame 열 기준 결측치 처리: 5% 이하→(1-결측길이/전체프레임) 보간, 5% 이상→전체구간평균 대체
+    - 개별 조인트별 유사도 계산: 부위별 묶음이 아닌 각 조인트(LShoulder, LUArm 등)별 DTW 유사도 산출
     - 쿼터니언 이중 안전망(정규화/zero-norm 교정/부호 연속성 유지)
     - 좌표계 정렬 시 프레임별 quaternion 보정 + 위치/회전 모두 안전 처리
     - 속도/가속도 계산 시 길이/유효값 보장
@@ -90,23 +91,164 @@ class MocapMotionAnalyzer:
     # ============================== I/O ==============================
 
     def load_mocap_data(self, file_path: str) -> pd.DataFrame | None:
-        """모션캡처 CSV 데이터를 로드합니다. 비수치 → NaN → 0 처리."""
+        """모션캡처 CSV 데이터를 로드합니다. 스마트한 결측치 처리 적용."""
         try:
             df = pd.read_csv(file_path)
             # 공백 컬럼명 정리
             df = df.rename(columns=str.strip)
             # 전부 float로 시도, 실패값은 NaN
             df = df.apply(pd.to_numeric, errors='coerce')
-            # NaN은 0으로 치환
-            n_nans = int(df.isna().sum().sum())
-            if n_nans > 0:
-                print(f"경고: '{file_path}' 내 비수치 또는 결측값 {n_nans}개를 0으로 대체했습니다.")
-            df = df.fillna(0.0)
+            
+            # 스마트한 결측치 처리
+            df = self._handle_missing_values(df, file_path)
+            
             print(f"파일 로드를 완료했습니다. 프레임 수: {df.shape[0]}, 컬럼 수: {df.shape[1]}")
             return df
         except Exception as e:
             print(f"데이터 로드 오류가 발생했습니다: {e}")
             return None
+
+    def _handle_missing_values(self, df: pd.DataFrame, file_path: str) -> pd.DataFrame:
+        """Frame 열 기준 스마트한 결측치 처리: 5% 기준으로 다른 보간 방식 적용"""
+        
+        # Frame 열 찾기 (대소문자 구분 없이)
+        frame_col = None
+        for col in df.columns:
+            if col.lower() in ['frame', 'frames']:
+                frame_col = col
+                break
+        
+        if frame_col is None:
+            print(f"경고: '{file_path}'에서 Frame 열을 찾을 수 없습니다. 기본 처리 방식을 사용합니다.")
+            return self._handle_missing_values_fallback(df, file_path)
+        
+        # 전체 프레임 수 확인 (Frame 열의 최대값)
+        try:
+            total_frames = int(df[frame_col].max())
+            if pd.isna(total_frames) or total_frames <= 0:
+                print(f"경고: '{file_path}'의 Frame 열이 유효하지 않습니다. 기본 처리 방식을 사용합니다.")
+                return self._handle_missing_values_fallback(df, file_path)
+        except (ValueError, TypeError):
+            print(f"경고: '{file_path}'의 Frame 열을 숫자로 변환할 수 없습니다. 기본 처리 방식을 사용합니다.")
+            return self._handle_missing_values_fallback(df, file_path)
+        
+        print(f"Frame 열 '{frame_col}' 감지: 총 {total_frames} 프레임")
+        
+        # 결측치 분석 (Frame 열 제외)
+        data_cols = [col for col in df.columns if col != frame_col]
+        total_cells = len(data_cols) * total_frames
+        missing_count = int(df[data_cols].isna().sum().sum())
+        
+        if missing_count == 0:
+            print("결측치가 없습니다.")
+            return df
+        
+        missing_ratio = missing_count / total_cells
+        print(f"결측치 분석 - 데이터 셀: {total_cells}, 결측치: {missing_count}개 ({missing_ratio:.2%})")
+        
+        if missing_ratio <= 0.05:  # 5% 이하
+            print(f"결측치 비율이 5% 이하 ({missing_ratio:.2%})이므로 (1-결측길이/전체프레임) 방식으로 보간합니다.")
+            return self._interpolate_with_ratio(df, data_cols, total_frames, missing_ratio)
+        else:  # 5% 이상
+            print(f"결측치 비율이 5% 이상 ({missing_ratio:.2%})이므로 전체 구간 평균값으로 대체합니다.")
+            return self._fill_with_overall_mean(df, data_cols)
+    
+    def _handle_missing_values_fallback(self, df: pd.DataFrame, file_path: str) -> pd.DataFrame:
+        """Frame 열이 없을 때의 기본 처리 방식"""
+        total_frames = df.shape[0]
+        total_cells = df.shape[0] * df.shape[1]
+        missing_count = int(df.isna().sum().sum())
+        
+        if missing_count == 0:
+            return df
+        
+        missing_ratio = missing_count / total_cells
+        print(f"기본 결측치 분석 - 총 프레임: {total_frames}, 총 셀: {total_cells}, 결측치: {missing_count}개 ({missing_ratio:.2%})")
+        
+        # 기본적으로 평균값으로 채움
+        df_filled = df.copy()
+        for col in df.columns:
+            if df[col].isna().any():
+                col_mean = df[col].mean()
+                if pd.isna(col_mean):
+                    col_mean = 0.0
+                df_filled[col] = df[col].fillna(col_mean)
+                n_filled = df[col].isna().sum()
+                print(f"  컬럼 '{col}': {n_filled}개 결측치를 평균값 {col_mean:.4f}로 채움")
+        
+        return df_filled
+    
+    def _interpolate_with_ratio(self, df: pd.DataFrame, data_cols: list, total_frames: int, missing_ratio: float) -> pd.DataFrame:
+        """(1-결측길이/전체프레임) 방식으로 보간"""
+        df_filled = df.copy()
+        
+        for col in data_cols:
+            if df[col].isna().any():
+                # 결측치 구간의 길이 계산
+                missing_mask = df[col].isna()
+                missing_groups = missing_mask.groupby((~missing_mask).cumsum())
+                
+                for group_idx, (_, group) in enumerate(missing_groups):
+                    if group.any():  # 결측치 그룹인 경우
+                        missing_length = group.sum()
+                        missing_length_ratio = missing_length / total_frames
+                        
+                        # 보간 계수 계산: (1 - 결측길이/전체프레임)
+                        interpolation_factor = 1.0 - missing_length_ratio
+                        
+                        # 앞뒤 유효값 찾기
+                        group_start = group.index[0]
+                        group_end = group.index[-1]
+                        
+                        # 앞쪽 유효값
+                        before_val = None
+                        for i in range(group_start - 1, -1, -1):
+                            if not df[col].iloc[i] is pd.NA and not pd.isna(df[col].iloc[i]):
+                                before_val = df[col].iloc[i]
+                                break
+                        
+                        # 뒤쪽 유효값
+                        after_val = None
+                        for i in range(group_end + 1, len(df)):
+                            if not df[col].iloc[i] is pd.NA and not pd.isna(df[col].iloc[i]):
+                                after_val = df[col].iloc[i]
+                                break
+                        
+                        # 보간값 계산
+                        if before_val is not None and after_val is not None:
+                            # 선형 보간 + 계수 적용
+                            interpolated_val = before_val * interpolation_factor + after_val * (1 - interpolation_factor)
+                        elif before_val is not None:
+                            interpolated_val = before_val * interpolation_factor
+                        elif after_val is not None:
+                            interpolated_val = after_val * interpolation_factor
+                        else:
+                            # 유효값이 없으면 컬럼 전체 평균 사용
+                            col_mean = df[col].mean()
+                            interpolated_val = col_mean if not pd.isna(col_mean) else 0.0
+                        
+                        # 결측치 구간에 보간값 적용
+                        df_filled.loc[group.index, col] = interpolated_val
+                        
+                        print(f"  컬럼 '{col}': {missing_length}개 연속 결측치를 계수 {interpolation_factor:.4f}로 보간 (값: {interpolated_val:.4f})")
+        
+        return df_filled
+    
+    def _fill_with_overall_mean(self, df: pd.DataFrame, data_cols: list) -> pd.DataFrame:
+        """전체 구간 평균값으로 대체"""
+        df_filled = df.copy()
+        
+        for col in data_cols:
+            if df[col].isna().any():
+                col_mean = df[col].mean()
+                if pd.isna(col_mean):
+                    col_mean = 0.0
+                
+                n_filled = df[col].isna().sum()
+                df_filled[col] = df[col].fillna(col_mean)
+                print(f"  컬럼 '{col}': {n_filled}개 결측치를 전체 구간 평균값 {col_mean:.4f}로 대체")
+        
+        return df_filled
 
     # ======================= Finite/Shape Guards =====================
 
@@ -752,36 +894,52 @@ class MocapMotionAnalyzer:
 
                 feature_similarities[f_type] = float(np.mean(sims)) if sims else 0.0
 
-            # 파트(왼팔/오른팔/왼다리/오른다리/코어/머리) 단위 DTW 산출
-            parts = {
-                'left_arm': ['LShoulder', 'LUArm', 'LFArm', 'LHand'],
-                'right_arm': ['RShoulder', 'RUArm', 'RFArm', 'RHand'],
-                'left_leg': ['LThigh', 'LShin', 'LFoot', 'LToe'],
-                'right_leg': ['RThigh', 'RShin', 'RFoot', 'RToe'],
-                'core': ['LThigh', 'RThigh', 'Hip', 'Ab', 'Chest'],
-                'head': ['LShoulder', 'RShoulder', 'Neck', 'Head'],
+            # 개별 조인트 단위 DTW 산출 (부위별 묶음이 아닌 각 조인트별 계산)
+            individual_joints = [
+                'LShoulder', 'LUArm', 'LFArm', 'LHand',  # Left Arm
+                'RShoulder', 'RUArm', 'RFArm', 'RHand',  # Right Arm
+                'LThigh', 'LShin', 'LFoot', 'LToe',      # Left Leg
+                'RThigh', 'RShin', 'RFoot', 'RToe',      # Right Leg
+                'Hip', 'Ab', 'Chest', 'Neck', 'Head'     # Core & Head
+            ]
+
+            # 조인트별 각도 키 매핑
+            angle_keys_by_joint: dict[str, set[str]] = {
+                'LShoulder': {'l_shoulder_angle'},
+                'LUArm': set(),
+                'LFArm': {'l_elbow_angle'},
+                'LHand': set(),
+                'RShoulder': {'r_shoulder_angle'},
+                'RUArm': set(),
+                'RFArm': {'r_elbow_angle'},
+                'RHand': set(),
+                'LThigh': set(),
+                'LShin': {'l_knee_angle'},
+                'LFoot': {'l_ankle_angle'},
+                'LToe': set(),
+                'RThigh': set(),
+                'RShin': {'r_knee_angle'},
+                'RFoot': {'r_ankle_angle'},
+                'RToe': set(),
+                'Hip': {'torso_twist'},
+                'Ab': {'torso_twist'},
+                'Chest': {'torso_twist'},
+                'Neck': {'neck_flexion'},
+                'Head': {'neck_flexion'},
             }
 
-            # 파트별 각도 키 매핑(해당 파트에 의미 있는 각도만 사용)
-            angle_keys_by_part: dict[str, set[str]] = {
-                'left_arm': {'l_shoulder_angle', 'l_elbow_angle'},
-                'right_arm': {'r_shoulder_angle', 'r_elbow_angle'},
-                'left_leg': {'l_knee_angle', 'l_ankle_angle'},
-                'right_leg': {'r_knee_angle', 'r_ankle_angle'},
-                'core': {'torso_twist'},
-                'head': {'neck_flexion'},
-            }
-
-            part_scores = {}
-            part_breakdown = {}
-            # 피처별 파트 스코어 계산 함수
-            def part_feature_score(feature_type: str, joints_set: set[str], part_name: str) -> float:
+            joint_scores = {}
+            joint_breakdown = {}
+            
+            # 개별 조인트별 피처 스코어 계산 함수
+            def joint_feature_score(feature_type: str, joint_name: str) -> float:
                 d1 = f1.get(feature_type, {})
                 d2 = f2.get(feature_type, {})
                 sims_local = []
+                
                 if feature_type == 'joint_angles':
-                    # 파트에 해당하는 각도 키만 사용
-                    allowed = angle_keys_by_part.get(part_name, set())
+                    # 해당 조인트에 의미 있는 각도만 사용
+                    allowed = angle_keys_by_joint.get(joint_name, set())
                     keys = (set(d1.keys()) & set(d2.keys())) & allowed
                     for key in keys:
                         seq1 = d1[key][s1:e1 + 1]
@@ -790,15 +948,16 @@ class MocapMotionAnalyzer:
                             continue
                         sims_local.append(self._dtw_similarity(seq1, seq2))
                 else:
-                    keys = (set(d1.keys()) & set(d2.keys())) & joints_set
-                    for key in keys:
-                        seq1 = d1[key][s1:e1 + 1]
-                        seq2 = d2[key][s2:e2 + 1]
+                    # 해당 조인트의 데이터만 사용
+                    if joint_name in d1 and joint_name in d2:
+                        seq1 = d1[joint_name][s1:e1 + 1]
+                        seq2 = d2[joint_name][s2:e2 + 1]
                         if seq1.size == 0 or seq2.size == 0:
-                            continue
+                            return 0.0
+                        
                         if feature_type == 'rotation':
-                            seq1 = self._normalize_quat_sequence(seq1, name=f"{key}.rot1")
-                            seq2 = self._normalize_quat_sequence(seq2, name=f"{key}.rot2")
+                            seq1 = self._normalize_quat_sequence(seq1, name=f"{joint_name}.rot1")
+                            seq2 = self._normalize_quat_sequence(seq2, name=f"{joint_name}.rot2")
                             for qarr in (seq1, seq2):
                                 for i in range(1, len(qarr)):
                                     if float(np.dot(qarr[i - 1], qarr[i])) < 0.0:
@@ -807,17 +966,18 @@ class MocapMotionAnalyzer:
                         else:
                             scaled_seq1, scaled_seq2 = (seq1, seq2) if self.scaling is None else self._fit_scaler(seq1, seq2)
                         sims_local.append(self._dtw_similarity(scaled_seq1, scaled_seq2))
+                
                 return float(np.mean(sims_local)) if sims_local else 0.0
 
-            for part_name, part_joints in parts.items():
-                jset = set(part_joints)
-                # 모든 피처를 고려한 파트 스코어(동일 가중 평균)
+            # 각 개별 조인트별로 유사도 계산
+            for joint_name in individual_joints:
+                # 모든 피처를 고려한 조인트 스코어(동일 가중 평균)
                 per_feature_scores = {}
                 for f_type in ('position', 'rotation', 'velocity', 'acceleration', 'joint_angles'):
-                    per_feature_scores[f_type] = part_feature_score(f_type, jset, part_name)
-                part_breakdown[part_name] = per_feature_scores
+                    per_feature_scores[f_type] = joint_feature_score(f_type, joint_name)
+                joint_breakdown[joint_name] = per_feature_scores
                 vals = list(per_feature_scores.values())
-                part_scores[part_name] = float(np.mean(vals)) if vals else 0.0
+                joint_scores[joint_name] = float(np.mean(vals)) if vals else 0.0
 
             # 조인트 단위 유사도(전 특성) 산출 및 내보내기 용도로 함께 반환
             per_joint = self._compute_per_joint_feature_similarities(f1, f2, s1, e1, s2, e2)
@@ -829,9 +989,9 @@ class MocapMotionAnalyzer:
 
             return float(final_similarity), {
                 **feature_similarities,
-                **{f"part_{k}": v for k, v in part_scores.items()},
+                **{f"joint_{k}": v for k, v in joint_scores.items()},
                 'per_joint': per_joint,
-                'part_breakdown': part_breakdown,
+                'joint_breakdown': joint_breakdown,
             }
 
         except Exception as e:
@@ -945,31 +1105,33 @@ def save_similarity_matrix(
 ) -> pd.DataFrame:
     """
     file2_dir의 모든 CSV(선택적으로 keyword 필터)를 file1과 비교해
-    '부위별+피처별 유사도'를 한 번에 CSV로 저장합니다.
+    '개별 조인트별+피처별 유사도'를 한 번에 CSV로 저장합니다.
 
     열 순서(고정):
-    Head, Core, Right_Leg, Left_Leg, Right_Arm, Left_Arm,
-    Acceleration, Velocity, Position, Joint Angle, rotation
+    LShoulder, LUArm, LFArm, LHand, RShoulder, RUArm, RFArm, RHand,
+    LThigh, LShin, LFoot, LToe, RThigh, RShin, RFoot, RToe,
+    Hip, Ab, Chest, Neck, Head,
+    Acceleration, Velocity, Position, Joint Angle, rotation, Overall
     """
-    # 고정 열 이름(이미지 순서 그대로)
+    # 고정 열 이름(개별 조인트별)
     col_order = [
-        "Head", "Core", "Right_Leg", "Left_Leg", "Right_Arm", "Left_Arm",
+        "LShoulder", "LUArm", "LFArm", "LHand",  # Left Arm
+        "RShoulder", "RUArm", "RFArm", "RHand",  # Right Arm
+        "LThigh", "LShin", "LFoot", "LToe",      # Left Leg
+        "RThigh", "RShin", "RFoot", "RToe",      # Right Leg
+        "Hip", "Ab", "Chest", "Neck", "Head",    # Core & Head
         "Acceleration", "Velocity", "Position", "Joint Angle", "rotation", "Overall"
     ]
 
     # 내부 키 매핑( compare_motions details → 표의 열 )
     key_map = {
-        "Head":         "part_head",
-        "Core":         "part_core",
-        "Right_Leg":    "part_right_leg",
-        "Left_Leg":     "part_left_leg",
-        "Right_Arm":    "part_right_arm",
-        "Left_Arm":     "part_left_arm",
-        "Acceleration": "acceleration",
-        "Velocity":     "velocity",
-        "Position":     "position",
-        "Joint Angle":  "joint_angles",
-        "rotation":     "rotation",
+        "LShoulder": "joint_LShoulder", "LUArm": "joint_LUArm", "LFArm": "joint_LFArm", "LHand": "joint_LHand",
+        "RShoulder": "joint_RShoulder", "RUArm": "joint_RUArm", "RFArm": "joint_RFArm", "RHand": "joint_RHand",
+        "LThigh": "joint_LThigh", "LShin": "joint_LShin", "LFoot": "joint_LFoot", "LToe": "joint_LToe",
+        "RThigh": "joint_RThigh", "RShin": "joint_RShin", "RFoot": "joint_RFoot", "RToe": "joint_RToe",
+        "Hip": "joint_Hip", "Ab": "joint_Ab", "Chest": "joint_Chest", "Neck": "joint_Neck", "Head": "joint_Head",
+        "Acceleration": "acceleration", "Velocity": "velocity", "Position": "position",
+        "Joint Angle": "joint_angles", "rotation": "rotation",
     }
 
     file1 = Path(file1_path)
@@ -1067,14 +1229,21 @@ def save_similarity_across_groups(
     end: int = 26,
     keyword: str | None = None,
     limit: int | None = None,
-    title: str = "hook_left",
+    title: str | None = None,  # None이면 자동 감지
     output_dir: str | None = None,
-) -> dict[int, pd.DataFrame]:
+    auto_file1: bool = True,  # file1_path가 폴더인 경우 모든 CSV 파일 자동 순회
+) -> dict[str, dict[int, pd.DataFrame]]:
     """
     베이스 디렉터리 아래의 p{02..26}_Global 폴더들을 오름차순으로 순회하여
     각 폴더 안 CSV와 file1을 비교한 '유사도 매트릭스'를 폴더별 CSV로 저장합니다.
+    
+    새로운 기능:
+    - file1_path가 폴더인 경우 모든 CSV 파일을 자동으로 순회
+    - 파일명에서 title 정보를 자동으로 추출 (jap, straight, hook_left, hook_right, uppercut_left, uppercut_right)
+    - file1과 같은 motion type의 file2 파일들만 자동으로 매칭하여 비교
+      예: hook_left_001.csv (file1) → hook_left가 포함된 모든 file2 파일들과 비교
 
-    반환값: { 그룹번호(int): DataFrame }  (생성된 순서대로)
+    반환값: { file1_name: { 그룹번호(int): DataFrame } }  (생성된 순서대로)
     """
     base_dir = _resolve_base_dir(file2_path_or_base)
     if not base_dir.exists() or not base_dir.is_dir():
@@ -1084,49 +1253,98 @@ def save_similarity_across_groups(
     out_dir = Path(output_dir) if output_dir else base_dir
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    results: dict[int, pd.DataFrame] = {}
+    # file1_path 처리: 파일인지 폴더인지 확인
+    file1_path_obj = Path(file1_path)
+    
+    if file1_path_obj.is_file():
+        # 단일 파일인 경우
+        file1_candidates = [file1_path_obj]
+        print(f"[단일 파일 모드] 기준 파일: {file1_path_obj.name}")
+    elif file1_path_obj.is_dir() and auto_file1:
+        # 폴더인 경우 모든 CSV 파일 수집
+        file1_candidates = sorted([p for p in file1_path_obj.glob("*.csv") if p.is_file()])
+        print(f"[자동 파일 순회 모드] 기준 폴더: {file1_path_obj}")
+        print(f"발견된 CSV 파일 수: {len(file1_candidates)}개")
+    else:
+        print(f"[오류] file1_path가 유효하지 않습니다: {file1_path}")
+        return {}
+
+    # 파일명에서 title 자동 추출 함수
+    def extract_title_from_filename(filename: str) -> str:
+        """파일명에서 motion type을 추출합니다."""
+        name_lower = filename.lower()
+        motion_types = ['jap', 'straight', 'hook_left', 'hook_right', 'uppercut_left', 'uppercut_right']
+        
+        for motion_type in motion_types:
+            if motion_type in name_lower:
+                return motion_type
+        
+        # 매칭되는 motion type이 없으면 파일명의 첫 부분 사용
+        return Path(filename).stem.split('_')[0]
+
+    all_results: dict[str, dict[int, pd.DataFrame]] = {}
+    
     print("\n" + "=" * 72)
     print(f"[그룹 배치 비교 시작] 베이스: {base_dir}")
     print(f"대상 그룹: p{start:02d}_Global ~ p{end:02d}_Global")
+    print(f"기준 파일 수: {len(file1_candidates)}개")
     print("=" * 72)
 
-    for i in range(start, end + 1):
-        group_name = f"p{i:02d}_Global"
-        group_dir = base_dir / group_name
-        if not group_dir.exists() or not group_dir.is_dir():
-            print(f"[안내] {group_name} 경로가 없습니다. 건너뜁니다.")
-            continue
+    # 각 기준 파일에 대해 처리
+    for file_idx, file1_candidate in enumerate(file1_candidates, 1):
+        file1_name = file1_candidate.stem
+        auto_detected_title = extract_title_from_filename(file1_name)
+        final_title = title if title is not None else auto_detected_title
+        
+        print(f"\n[{file_idx}/{len(file1_candidates)}] 기준 파일: {file1_name}")
+        print(f"자동 감지된 제목: {auto_detected_title} (최종 제목: {final_title})")
+        
+        file_results: dict[int, pd.DataFrame] = {}
+        
+        # 각 그룹에 대해 처리
+        for i in range(start, end + 1):
+            group_name = f"p{i:02d}_Global"
+            group_dir = base_dir / group_name
+            if not group_dir.exists() or not group_dir.is_dir():
+                print(f"  [안내] {group_name} 경로가 없습니다. 건너뜁니다.")
+                continue
 
-        print("\n" + "-" * 64)
-        print(f"[진행] 그룹 폴더: {group_name}")
-        out_csv = out_dir / f"{title}_{group_name}_002_similarity_matrix.csv"
+            print(f"  [진행] 그룹 폴더: {group_name}")
+            out_csv = out_dir / f"{final_title}_{group_name}_{file1_name}_similarity_matrix.csv"
 
-        df = save_similarity_matrix(
-            file1_path=file1_path,
-            file2_dir=str(group_dir),
-            analyzer=analyzer,
-            keyword=keyword,
-            limit=limit,
-            title=f"{title}|{group_name}",
-            output_csv_path=str(out_csv),
-        )
-        if not df.empty:
-            results[i] = df
-            print(f"[완료] {group_name} 결과를 저장했습니다: {out_csv}")
-        else:
-            print(f"[안내] {group_name}에서 유효한 결과가 없어 CSV를 생성하지 않았습니다.")
+            # file1 파일명에서 motion type 추출하여 file2에서도 같은 motion type 파일들만 찾기
+            motion_type = extract_title_from_filename(file1_name)
+            matching_keyword = motion_type if keyword is None else f"{motion_type}_{keyword}" if keyword else motion_type
+            print(f"  [매칭] motion type: '{motion_type}' → file2에서 '{matching_keyword}' 포함 파일들만 비교")
+            
+            df = save_similarity_matrix(
+                file1_path=str(file1_candidate),
+                file2_dir=str(group_dir),
+                analyzer=analyzer,
+                keyword=matching_keyword,  # file1과 같은 motion type만 비교
+                limit=limit,
+                title=f"{final_title}|{group_name}|{file1_name}",
+                output_csv_path=str(out_csv),
+            )
+            if not df.empty:
+                file_results[i] = df
+                print(f"  [완료] {group_name} 결과를 저장했습니다: {out_csv}")
+            else:
+                print(f"  [안내] {group_name}에서 유효한 결과가 없어 CSV를 생성하지 않았습니다.")
+        
+        all_results[file1_name] = file_results
 
     print("\n" + "=" * 72)
     print("[그룹 배치 비교 완료]")
     print("=" * 72)
-    return results
+    return all_results
 
 # ============================= 기존 similarity 계산하는 함수 아래에 작성===================
 
 # =============================== Main ==============================
 
 if __name__ == "__main__":
-    print("복싱 동작 DTW 분석기 (v2.14 - 안정성/정확도 강화)")
+    print("복싱 동작 DTW 분석기 (v2.16 - 개별 조인트별 유사도 + 자동화)")
     print("=" * 64)
 
     # uppercut_left_001.csv
@@ -1136,24 +1354,29 @@ if __name__ == "__main__":
     # jap_001.csv
     # straight_003.csv
 
-    #file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/uppercut_left_002.csv"
-    #file2 = "/Users/jonabi/Downloads/TEPA/p06_Global"
+    file1 = "/Users/jonabi/Downloads/TEPA/mocap_test/"
+    file2 = "/Users/jonabi/Downloads/TEPA/p02_Global"
     
     # 윈도우 기준 
     #file1 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
     #file2 = "C:\\Users\\PC\\OneDrive\\jjhS2lhj\\GitHub\\Collaborate_Code\\p02_Global"
  
-    file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
-    file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p02_Global"
+    # 기존 방식 (단일 파일)
+    # file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test\\hook_left_002.csv"
+    # file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p02_Global"
+    
+    # 새로운 자동화 방식 (폴더의 모든 CSV 파일 자동 순회)
+    #file1 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\mocap_test"  # 폴더 경로
+    #file2 = "C:\\Users\\user\\Downloads\\TEPA\\Collaborate_Code\\p02_Global"
  
  
     # 가중치 사용자 정의 예시 (필요 시 수정)
     custom_feature_weights = {
-        'position': 0.0,
-        'rotation': 0.0,
-        'velocity': 1.0,
-        'acceleration': 1.0,
-        'joint_angles': 1.0,
+        'position': 0.5,
+        'rotation': 0.5,
+        'velocity': 0.0,
+        'acceleration': 0.0,
+        'joint_angles': 0.0,
     }
 
     analyzer = MocapMotionAnalyzer(scaling='standard', feature_weights=custom_feature_weights)  
@@ -1172,18 +1395,32 @@ if __name__ == "__main__":
     # )
     
     
-    # p02_Global ~ p26_Global을 오름차순 탐색
-    _ = save_similarity_across_groups(
-        file1_path=file1,
-        file2_path_or_base=file2,  # 혹은 베이스 경로 자체
+    # 새로운 자동화 기능 사용 예시
+    print("\n=== 새로운 자동화 기능 사용 ===")
+    print("file1_path가 폴더인 경우 모든 CSV 파일을 자동으로 순회합니다.")
+    print("파일명에서 title 정보를 자동으로 추출합니다.")
+    print()
+    
+    all_results = save_similarity_across_groups(
+        file1_path=file1,                    # 폴더 경로 (모든 CSV 파일 자동 순회)
+        file2_path_or_base=file2,            # 베이스 경로
         analyzer=analyzer,
-        start=2,
-        end=26,
-        keyword="hook_right",   # 필요 시 None
-        limit=None,            # 필요 시 정수
-        title="hook_left",
-        output_dir=None,       # None이면 베이스 디렉터리에 저장
+        start=2,                             # 시작 그룹 번호
+        end=26,                              # 끝 그룹 번호
+        keyword=None,                        # 파일명 필터 (None = 모든 파일)
+        limit=None,                          # 파일 수 제한 (None = 제한 없음)
+        title=None,                          # None = 파일명에서 자동 추출
+        output_dir=None,                     # None이면 베이스 디렉터리에 저장
+        auto_file1=True,                     # True = file1_path 폴더의 s모든 CSV 자동 순회
     )
+    
+    # 결과 요약 출력
+    print("\n=== 처리 결과 요약 ===")
+    for file_name, file_results in all_results.items():
+        print(f"기준 파일: {file_name}")
+        print(f"  처리된 그룹 수: {len(file_results)}개")
+        for group_num, df in file_results.items():
+            print(f"  p{group_num:02d}_Global: {len(df)}개 파일 비교 완료")
     
     ## ======================= Similarity 계산 방식 (폴더를 따로 본인이 지정해줘야함) =========================
     
