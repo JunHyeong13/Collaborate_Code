@@ -23,8 +23,11 @@ class MocapMotionAnalyzer:
     """
     모션 캡처 데이터를 사용하여 두 복싱 동작의 유사도를 정교하게 분석하는 클래스.
 
-    v2.17 (Frame 열 기준 정교한 결측치 처리)
-    - CSV 로드 시 Frame 열 기준 결측치 처리: 5% 이하→(1-결측길이/전체프레임) 보간, 5% 이상→전체구간평균 대체
+    v2.18 (DTW 거리 값 반환 및 성능 최적화)
+    - DTW 거리 값 직접 반환: 지수 함수 변환 제거하여 원본 DTW 거리 값 사용
+    - DTW 성능 최적화: dtaidistance 라이브러리 활용한 pruning 기법 적용
+    - Window size 제한: DTW 계산 범위 제한으로 계산 시간 단축
+    - Frame 열 기준 정교한 결측치 처리: 5% 이하→(1-결측길이/전체프레임) 보간, 5% 이상→전체구간평균 대체
     - 개별 조인트별 유사도 계산: 부위별 묶음이 아닌 각 조인트(LShoulder, LUArm 등)별 DTW 유사도 산출
     - 쿼터니언 이중 안전망(정규화/zero-norm 교정/부호 연속성 유지)
     - 좌표계 정렬 시 프레임별 quaternion 보정 + 위치/회전 모두 안전 처리
@@ -36,7 +39,8 @@ class MocapMotionAnalyzer:
     """
 
     def __init__(self, scaling: str = 'standard', feature_weights: dict | None = None,
-                 normalize_scale: bool = True, scale_mode: str = 'combined'):
+                 normalize_scale: bool = True, scale_mode: str = 'combined',
+                 use_optimized_dtw: bool = False, dtw_window_size: int | None = None):
         assert scaling in ('standard', 'minmax', None)
         self.scaling = scaling
 
@@ -73,6 +77,10 @@ class MocapMotionAnalyzer:
         assert scale_mode in ('shoulder', 'torso', 'combined')
         self.normalize_scale = bool(normalize_scale)
         self.scale_mode = scale_mode
+        
+        # DTW 최적화 설정
+        self.use_optimized_dtw = bool(use_optimized_dtw)
+        self.dtw_window_size = dtw_window_size
 
     def set_feature_weights(self, feature_weights: dict, normalize: bool = True):
         """특성 가중치를 동적으로 설정합니다."""
@@ -542,7 +550,7 @@ class MocapMotionAnalyzer:
                     seq2 = d2[key][s2:e2 + 1]
                     if seq1.size == 0 or seq2.size == 0:
                         continue
-                    per_keys[key] = self._dtw_similarity(seq1, seq2)
+                    per_keys[key] = self._dtw_similarity_optimized(seq1, seq2) if self.use_optimized_dtw else self._dtw_similarity(seq1, seq2)
             else:
                 keys = set(d1.keys()) & set(d2.keys())
                 for key in keys:
@@ -560,7 +568,7 @@ class MocapMotionAnalyzer:
                         scaled_seq1, scaled_seq2 = seq1, seq2
                     else:
                         scaled_seq1, scaled_seq2 = (seq1, seq2) if self.scaling is None else self._fit_scaler(seq1, seq2)
-                    per_keys[key] = self._dtw_similarity(scaled_seq1, scaled_seq2)
+                    per_keys[key] = self._dtw_similarity_optimized(scaled_seq1, scaled_seq2) if self.use_optimized_dtw else self._dtw_similarity(scaled_seq1, scaled_seq2)
 
             result[f_type] = per_keys
         return result
@@ -796,7 +804,7 @@ class MocapMotionAnalyzer:
         return s1, s2
 
     def _dtw_similarity(self, seq1, seq2, k=10):
-        """DTW 거리를 정규화하고 지수 함수로 유사도로 변환."""
+        """DTW 거리를 계산하여 반환 (지수 함수 변환 없이 원본 거리 값 사용)."""
         if not isinstance(seq1, np.ndarray): seq1 = np.array(seq1, dtype=float)
         if not isinstance(seq2, np.ndarray): seq2 = np.array(seq2, dtype=float)
         if seq1.size == 0 or seq2.size == 0: return 0.0
@@ -818,9 +826,55 @@ class MocapMotionAnalyzer:
         else:
             dist_func = euclidean
 
+        # DTW 거리 계산
         distance, _ = fastdtw(seq1, seq2, dist=dist_func)
         normalized_distance = distance / (len(seq1) + len(seq2))
-        return float(np.exp(-k * normalized_distance))
+        
+        # 지수 함수 변환 제거 - 원본 DTW 거리 값 반환
+        # return float(np.exp(-k * normalized_distance))  # 기존 지수 변환 방식
+        return float(normalized_distance)  # 정규화된 DTW 거리 값 반환
+
+    def _dtw_similarity_optimized(self, seq1, seq2, k=10, use_pruning=True, window_size=None):
+        """DTW 거리를 최적화된 방식으로 계산 (성능 개선 버전)."""
+        if not isinstance(seq1, np.ndarray): seq1 = np.array(seq1, dtype=float)
+        if not isinstance(seq2, np.ndarray): seq2 = np.array(seq2, dtype=float)
+        if seq1.size == 0 or seq2.size == 0: return 0.0
+
+        # 최종 안전화
+        seq1 = self._safe_array(seq1, name="dtw_seq1")
+        seq2 = self._safe_array(seq2, name="dtw_seq2")
+
+        # 거리 함수 선택
+        if seq1.ndim == 1:
+            dist_func = lambda x, y: float(abs(x - y))
+        elif seq1.shape[1] == 4:
+            # 쿼터니언 sign-invariant
+            def quat_dist(q1, q2):
+                d = float(abs(np.dot(q1, q2)))
+                d = np.clip(d, -1.0, 1.0)
+                return 1.0 - d
+            dist_func = quat_dist
+        else:
+            dist_func = euclidean
+
+        # window_size 설정 (클래스 설정값 사용)
+        effective_window_size = window_size if window_size is not None else self.dtw_window_size
+
+        # 최적화된 DTW 계산
+        if use_pruning:
+            # Pruning을 사용한 DTW (dtaidistance 라이브러리 사용)
+            try:
+                from dtaidistance import dtw
+                distance = dtw.distance(seq1, seq2, use_pruning=True)
+            except ImportError:
+                # dtaidistance가 없으면 기본 fastdtw 사용
+                distance, _ = fastdtw(seq1, seq2, dist=dist_func, radius=effective_window_size)
+        else:
+            # 기본 fastdtw 사용
+            distance, _ = fastdtw(seq1, seq2, dist=dist_func, radius=effective_window_size)
+        
+        normalized_distance = distance / (len(seq1) + len(seq2))
+        return float(normalized_distance)  # 정규화된 DTW 거리 값 반환
 
     # ============================ Compare ===========================
 
@@ -866,7 +920,7 @@ class MocapMotionAnalyzer:
                         if seq1.size == 0 or seq2.size == 0:
                             continue
                         # 각도는 일반적으로 스케일링 불필요
-                        sim = self._dtw_similarity(seq1, seq2)
+                        sim = self._dtw_similarity_optimized(seq1, seq2) if self.use_optimized_dtw else self._dtw_similarity(seq1, seq2)
                         sims.append(sim)
                 else:
                     keys = set(d1.keys()) & set(d2.keys())
@@ -889,7 +943,7 @@ class MocapMotionAnalyzer:
                             # 위치/속도/가속도
                             scaled_seq1, scaled_seq2 = (seq1, seq2) if self.scaling is None else self._fit_scaler(seq1, seq2)
 
-                        sim = self._dtw_similarity(scaled_seq1, scaled_seq2)
+                        sim = self._dtw_similarity_optimized(scaled_seq1, scaled_seq2) if self.use_optimized_dtw else self._dtw_similarity(scaled_seq1, scaled_seq2)
                         sims.append(sim)
 
                 feature_similarities[f_type] = float(np.mean(sims)) if sims else 0.0
@@ -946,7 +1000,7 @@ class MocapMotionAnalyzer:
                         seq2 = d2[key][s2:e2 + 1]
                         if seq1.size == 0 or seq2.size == 0:
                             continue
-                        sims_local.append(self._dtw_similarity(seq1, seq2))
+                        sims_local.append(self._dtw_similarity_optimized(seq1, seq2) if self.use_optimized_dtw else self._dtw_similarity(seq1, seq2))
                 else:
                     # 해당 조인트의 데이터만 사용
                     if joint_name in d1 and joint_name in d2:
@@ -965,7 +1019,7 @@ class MocapMotionAnalyzer:
                             scaled_seq1, scaled_seq2 = seq1, seq2
                         else:
                             scaled_seq1, scaled_seq2 = (seq1, seq2) if self.scaling is None else self._fit_scaler(seq1, seq2)
-                        sims_local.append(self._dtw_similarity(scaled_seq1, scaled_seq2))
+                        sims_local.append(self._dtw_similarity_optimized(scaled_seq1, scaled_seq2) if self.use_optimized_dtw else self._dtw_similarity(scaled_seq1, scaled_seq2))
                 
                 return float(np.mean(sims_local)) if sims_local else 0.0
 
